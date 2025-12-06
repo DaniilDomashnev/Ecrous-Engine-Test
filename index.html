@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>EcrousHub</title>
+		<link rel="icon" type="image/png" href="public/vite.jpg" />
+    <link rel="stylesheet" href="src/styles/loading.css">
+    <link rel="stylesheet" href="src/styles/fonts.css">
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="stylesheet" href="src/styles/scroll.css">
+    <link rel="stylesheet" href="src/styles/themes.css">
+
+    <!-- Menu -->
+    <link rel="stylesheet" href="src/styles/menu/MyProjects.css">
+    <link rel="stylesheet" href="src/styles/menu/Gradle.css">
+    <link rel="stylesheet" href="src/styles/menu/Profile.css">
+    <link rel="stylesheet" href="src/styles/menu/News.css">
+    <link rel="stylesheet" href="src/styles/menu/Settings.css">
+    <link rel="stylesheet" href="src/styles/menu/UploadMusic.css">
+	</head>
+	<body>
+
+    <div class="title">Ecrous Engine</div>
+    <div class="side-panel">
+        <button class="menu-button" onclick="openMyProjects()" data-translate="myProjects">Мои Проекты</button>
+        <button class="menu-button" onclick="openCommunity()" data-translate="xStore">XStore</button>
+        <button class="menu-button" data-translate="blackStore">BlackStore</button>
+        <button class="menu-button" onclick="openProfile()" data-translate="profile">Профиль</button>
+        <button id="myBtn" class="menu-button" data-translate="thanks" onclick="openThanks()">Благодарности</button>
+        <div class="build-info" data-translate="buildInfo">ECX 2025.31.12</div>
+    </div>
+
+    <!-- Соцсети в левом нижнем углу -->
+    <div class="social-links">
+        <a href="https://www.youtube.com/@EcrousEngine" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/FFFFFF/youtube-play.png" alt="YouTube">
+        </a>
+
+        <a href="tg://resolve?domain=ecrousengine" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/FFFFFF/telegram-app.png" alt="Telegram">
+        </a>
+
+        <a href="https://boosty.to/ecrousengine3/donate" target="_blank">
+            <img src="src/assets/boosty.svg" alt="Boosty" style="width: 50px; height: 50px;">
+        </a>
+
+        <a href="https://discord.gg/m6XzdxBrHf" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/FFFFFF/discord-logo.png" alt="Discord">
+        </a>
+    </div>
+
+    <div class="ButtonsMenuSmall">
+      <a href="#" onclick="openPromoCodes(event)">
+        <img src="https://img.icons8.com/?size=100&id=c8QRxDDPxZ7g&format=png&color=FFFFFF" alt="Promo Codes">
+      </a>
+      <a href="#" onclick="openTutorials(event)">
+        <img src="https://img.icons8.com/ios-filled/48/FFFFFF/book.png" alt="Tutorials">
+      </a>
+      <a href="#" onclick="openTabby(event)">
+        <img src="https://img.icons8.com/ios-filled/48/FFFFFF/tab.png" alt="Tabby">
+      </a>
+      <a href="#" onclick="openAchivements(event)">
+        <img src="https://img.icons8.com/ios-filled/48/FFFFFF/trophy.png" alt="Achievements">
+      </a>
+      <a href="#" onclick="openNews()">
+        <img src="https://img.icons8.com/ios-filled/48/FFFFFF/news.png" alt="News">
+      </a>
+      <a href="#" onclick="openSettings()">
+        <img src="https://img.icons8.com/ios-filled/48/FFFFFF/settings.png" alt="Settings">
+      </a>
+      <a href="#" onclick="openSettings(event)">
+        <img src="https://img.icons8.com/?size=100&id=2220&format=png&color=FFFFFF" alt="More">
+      </a>
+    </div>
+
+    <div class="center-container">
+        <img src="https://img.icons8.com/?size=100&id=Rtc4TvgYD4oM&format=png&color=FFFFFF"
+            alt="No Projects" class="center-image">
+
+        <div class="center-text" data-translate="centerText">
+            Похоже, у вас еще нет проектов.
+            <br>Создайте новый или импортируйте!
+        </div>
+    </div>
+
+    <!-- Мои проекты -->
+    <div id="MyProjectsPanel" class="MyProjects-panel" style="display: none;">
+        
+        <!-- Кнопка закрыть -->
+        <button class="close-MyProjects" onclick="closeMyProjects()">
+            <img src="https://img.icons8.com/ios-glyphs/50/FFFFFF/macos-close.png" alt="Закрыть">
+        </button>
+
+        <h1 class="titleMyProjects" data-translate="MyProjects">Мои Проекты</h1>
+
+        <div class="MyProjects-content">
+
+            <!-- Белые иконки через Icons8 -->
+            <img src="https://img.icons8.com/ios-glyphs/50/FFFFFF/plus-math.png" class="plus-button" alt="Добавить">
+
+            <img src="https://img.icons8.com/ios-glyphs/50/FFFFFF/upload.png" class="import-button" alt="Импорт">
+
+            <!-- Список проектов -->
+            <div class="project-list" id="projectList"></div>
+
+            <!-- Модальное окно -->
+            <div class="modals" id="projectModal">
+                <div class="modals-content">
+                    <h2>Введите название проекта</h2>
+                    <input type="text" id="projectName" placeholder="Название проекта">
+                    <button id="submitProject">Готово</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Профиль -->
+    <div id="profilePanel" class="profile-panel" style="display: none;">
+
+        <!-- Кнопка закрыть -->
+        <button class="profile-close" onclick="closeProfile()">
+            <img src="https://img.icons8.com/ios-glyphs/30/FFFFFF/macos-close.png" alt="Закрыть">
+        </button>
+
+        <h1 class="profile-title">Профиль</h1>
+
+        <div class="profile-content">
+
+            <!-- Аватар -->
+            <img class="profile-avatar" 
+                src="https://img.icons8.com/ios-filled/100/FFFFFF/user-male-circle.png"
+                alt="Avatar">
+
+            <!-- Информация о пользователе -->
+            <div class="profile-info">
+                <p><strong>Имя:</strong> <span id="profileName">Неизвестный пользователь</span></p>
+                <p><strong>ID:</strong> <span id="profileID">0000</span></p>
+                <p><strong>Последний вход:</strong> <span id="profileLastSeen">—</span></p>
+            </div>
+
+            <!-- Кнопки -->
+            <button class="profile-button" onclick="toggleTheme()">Сменить тему</button>
+            <button class="profile-button logout" onclick="logout()">Выйти из аккаунта</button>
+
+        </div>
+    </div>
+
+    <!-- Новости -->
+    <div id="newsPanel" class="news-panel" style="display: none;">
+        <button class="news-close" onclick="closeNews()">
+            <img src="https://img.icons8.com/ios-glyphs/30/FFFFFF/macos-close.png" />
+        </button>
+
+        <h1 class="news-title">Новости</h1>
+
+        <div class="news-list" id="newsList"></div>
+    </div>
+
+    <!-- === ПОЛНАЯ НОВОСТЬ === -->
+    <div id="fullNewsPanel" class="full-news-panel" style="display: none;">
+        <button class="news-close" onclick="closeFullNews()">
+            <img src="https://img.icons8.com/ios-glyphs/30/FFFFFF/macos-close.png" />
+        </button>
+
+        <div class="full-news-content" id="fullNewsContent"></div>
+    </div>
+
+    <!-- Пункт благодарности -->
+    <div id="thanksPanel" class="thanks-panel" style="display: none;">
+        <button class="thanks-close" onclick="closeThanks()">
+            <img src="https://img.icons8.com/ios-glyphs/30/FFFFFF/macos-close.png" alt="Закрыть">
+        </button>
+
+        <h1 class="thanks-title">Благодарности</h1>
+
+        <div class="thanks-credits">
+
+            <h2 class="credits-title">Лучшие Ребята!</h2>
+            <p class="credits-subtitle">Я хочу выразить благодарность следующим людям:</p>
+
+            <!-- Программисты -->
+            <section class="credits-section">
+                <h3>Программисты</h3>
+                <ul>
+                    <li>[[RUSLAN'S ACCOUNT]] - за помощь с кодом</li>
+                    <li>Shodiyor - за помощь с кодом</li>
+                    <li>Dragon Reis - за помощь с кодом</li>
+                    <li>Sevasik - за помощь с кодом</li>
+                    <li>Vasilii1411 - за помощь с кодом</li>
+                    <li>Prodemo70 - за помощь с кодом</li>
+                    <li>Romanchik - за помощь с кодом</li>
+                </ul>
+            </section>
+
+            <!-- Beta Testers -->
+            <section class="credits-section">
+                <h3>Beta Testers</h3>
+                <ul>
+                    <li>W1NDOW - за тестирование</li>
+                    <li>Квистер - за тестирование</li>
+                    <li>Sevasik - за тестирование</li>
+                    <li>Простiй - за тестирование</li>
+                    <li>[[RUSLAN'S ACCOUNT]] - за тестирование</li>
+                    <li>FingerGD2.2 - за тестирование</li>
+                    <li>Dark Games - за тестирование</li>
+                    <li>Mr. pro - за тестирование</li>
+                    <li>Учёный Года - за тестирование</li>
+                    <li>WhyLorn - за тестирование</li>
+                    <li>Prodemo70 - за тестирование</li>
+                    <li>Spayk 2.0 - за тестирование</li>
+                    <li>Romanchik - за помощь с кодом</li>
+                </ul>
+            </section>
+
+            <!-- Поддержка -->
+            <section class="credits-section">
+                <h3>Поддержка</h3>
+                <ul>
+                    <li>Моим подписчикам - за моральную поддержку</li>
+                    <li>Квистер - за критику и отзывы</li>
+                    <li>Mate - за дружбу</li>
+                    <li>Romanchik - за дружбу</li>
+                </ul>
+            </section>
+
+            <!-- Дизайнеры -->
+            <section class="credits-section">
+                <h3>Дизайнеры</h3>
+                <ul>
+                    <li>WesllemCG - за помощь с дизайном</li>
+                    <li>Humbleoff - за помощь с дизайном</li>
+                    <li>Totalitarian Utopia - за помощь с дизайном</li>
+                    <li>Sevasik - за помощь с дизайном</li>
+                </ul>
+            </section>
+
+            <!-- Окончательная благодарность -->
+            <div class="credits-final">
+                Отдельное спасибо всем, кто пользуется Ecrous Engine.
+                <br>Ваше участие помогает проекту расти и развиваться.
+            </div>
+
+        </div>
+    </div>
+
+    <!-- === ПАНЕЛЬ НАСТРОЕК === -->
+    <div id="settingsPanel" class="settings-panel" style="display: none;">
+
+        <!-- Кнопка закрытия -->
+        <button class="settings-close" onclick="closeSettings()">
+            <img src="https://img.icons8.com/ios-glyphs/30/FFFFFF/macos-close.png" />
+        </button>
+
+        <h1 class="settings-title">Настройки</h1>
+
+        <div class="settings-content">
+
+            <!-- Тема -->
+            <div class="settings-section">
+                <h3>Тема</h3>
+
+                <select id="ThemeSelect" onchange="changeTheme()">
+                  <option value="Dark">Тёмная</option>
+                  <option value="Light">Светлая</option>
+                  <option value="Night">Ночная</option>
+
+                  <option value="Ruby">Рубиновая (Тёмная)</option>
+                  <option value="RubyLight">Рубиновая (Светлая)</option>
+                  <option value="RubyNeon">Рубиновая (Неоновая)</option>
+                  <option value="Gray">Серая</option>
+
+                  <option value="Emerald">Изумрудная</option>
+                  <option value="Gold">Золотая</option>
+                  <option value="Diamond">Алмазная</option>
+                  <option value="Sapphire">Сапфировая</option>
+
+                  <option value="Mint">Мятная</option>
+                  <option value="Sakura">Сакура</option>
+                  <option value="Sunset">Пустынный закат</option>
+                  <option value="Frost">Ледяная</option>
+              </select>
+
+              <button id="uploadThemeBtn" class="theme-upload-btn">
+                Загрузить тему
+              </button>
+              <input type="file" id="themeFileInput" accept=".css" style="display:none;">
+            </div>
+
+            <!-- Язык -->
+            <div class="settings-section">
+                <h3>Язык</h3>
+
+                <select id="languageSelect" onchange="changeLanguage()">
+                    <option value="ru">Русский</option>
+                    <option value="en">English</option>
+                    <option value="kz">Қазақша</option>
+                </select>
+            </div>
+
+            <!-- Музыка -->
+            <div class="settings-section">
+                <h3>Музыка</h3>
+
+                <button id="uploadMusicBtn" class="music-upload-btn">
+                    Загрузить музыку
+                </button>
+                <input type="file" id="musicFileInput" accept=".mp3,.wav,.ogg" style="display:none;">
+
+                <!-- Плеер -->
+                <div id="musicPlayer" class="music-player" style="display:none;">
+                    <button id="playPauseBtn">⏸ Пауза</button>
+                    <div class="music-time">
+                        <span id="currentTime">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                    <input type="range" id="seekBar" min="0" value="0">
+                    <div class="volume-control">
+                        Громкость:
+                        <input type="range" id="volumeBar" min="0" max="1" step="0.01" value="1">
+                    </div>
+                </div>
+            </div>
+
+            <!-- UI настройки -->
+            <div class="settings-section">
+                <h3>Интерфейс</h3>
+
+                <label class="switch-row">
+                    <span>Анимации интерфейса</span>
+                    <label class="switch">
+                        <input id="uiAnimations" type="checkbox" checked onchange="toggleUIAnimations()">
+                        <span class="slider"></span>
+                    </label>
+                </label>
+
+                <label class="switch-row">
+                    <span>Показывать подсказки</span>
+                    <label class="switch">
+                        <input id="uiHints" type="checkbox" checked onchange="toggleHints()">
+                        <span class="slider"></span>
+                    </label>
+                </label>
+            </div>
+
+        </div>
+
+    </div>
+
+		<div id="loading">
+			<div class="loading-logo">EE</div>
+			<div class="loading-text">Ecrous Engine</div>
+			<div class="loading-bar">
+				<div class="loading-progress"></div>
+			</div>
+		</div>
+
+    <script src="src/scripts/loading.js"></script>
+    <script src="src/scripts/script.js"></script>
+    <script src="src/scripts/Language.js"></script>
+
+    <!-- Menu -->
+    <script src="src/scripts/Menu/MyProjects.js"></script>
+    <script src="src/scripts/Menu/Gradle.js"></script>
+    <script src="src/scripts/Menu/Profile.js"></script>
+    <script src="src/scripts/Menu/News.js"></script>
+    <script src="src/scripts/Menu/Settings.js"></script>
+    <script src="src/scripts/Menu/UploadMusic.js"></script>
+	</body>
+</html>

@@ -1,0 +1,181 @@
+/* ======================================
+   ПАНЕЛЬ БЛАГОДАРНОСТЕЙ (ТЕМЫ ПОДДЕРЖИВАЮТСЯ)
+====================================== */
+
+.thanks-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+
+    width: 70%;
+    max-width: 800px;
+
+    background: var(--bg-elevated);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-soft);
+
+    color: var(--text);
+    padding: 26px 30px 30px;
+
+    z-index: 1100;
+    display: none;
+
+    animation: thanksAppear 0.4s ease forwards;
+}
+
+/* Анимация появления */
+@keyframes thanksAppear {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Кнопка закрытия */
+.thanks-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.thanks-close img {
+    width: 26px;
+    height: 26px;
+    opacity: 0.8;
+    transition: 0.25s;
+
+    /* Автоматически белая в тёмной теме и тёмная в светлой */
+    filter: brightness(0) invert(1);
+}
+
+body.theme-light .thanks-close img {
+    filter: none;
+}
+
+.thanks-close img:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Заголовок панели */
+.thanks-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: var(--text);
+}
+
+/* Внутренний блок */
+.thanks-credits {
+    background: var(--bg-elevated-soft);
+    padding: 20px 24px 24px;
+
+    border-radius: var(--radius-lg);
+    box-shadow: inset 0 0 12px rgba(0,0,0,0.25);
+
+    max-height: 60vh;
+    overflow-y: auto;
+
+    border: 1px solid var(--border);
+}
+
+/* Заголовки */
+.credits-title {
+    text-align: center;
+    font-size: 24px;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+
+.credits-subtitle {
+    text-align: center;
+    color: var(--text-soft);
+    margin-bottom: 18px;
+}
+
+/* Раздел */
+.credits-section {
+    margin-bottom: 22px;
+}
+
+.credits-section h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--accent);
+}
+
+/* Списки */
+.credits-section ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.credits-section li {
+    background: var(--bg);
+    padding: 8px 12px;
+
+    margin-bottom: 6px;
+    border-radius: 12px;
+
+    color: var(--text);
+    border-left: 3px solid var(--accent);
+
+    font-size: 15px;
+    transition: 0.2s ease;
+
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.credits-section li:hover {
+    background: var(--bg-elevated);
+    transform: translateX(3px);
+}
+
+/* Финальный текст */
+.credits-final {
+    text-align: center;
+    font-size: 16px;
+    margin-top: 18px;
+    color: var(--accent-strong);
+}
+
+/* Скролл */
+.thanks-credits::-webkit-scrollbar {
+    width: 8px;
+}
+
+.thanks-credits::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 10px;
+}
+
+.thanks-credits::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* Адаптив */
+@media (max-width: 600px) {
+    .thanks-panel {
+        width: 90%;
+        padding: 20px 18px 22px;
+    }
+
+    .thanks-credits {
+        padding: 16px 14px 18px;
+    }
+
+    .credits-section li {
+        font-size: 14px;
+    }
+}

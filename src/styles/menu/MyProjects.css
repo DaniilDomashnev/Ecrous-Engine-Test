@@ -1,0 +1,293 @@
+/* ======================================
+   ПАНЕЛЬ "МОИ ПРОЕКТЫ" (ПОЛНАЯ ПОДДЕРЖКА ТЕМ)
+====================================== */
+
+.MyProjects-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+
+    width: 75%;
+    height: 70%;
+    padding: 28px;
+
+    background: var(--bg-elevated);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-soft);
+
+    color: var(--text);
+    opacity: 0;
+    z-index: 999;
+
+    display: flex;
+    flex-direction: column;
+
+    animation: fadeInPanel 0.4s ease forwards;
+}
+
+/* Анимация появления панели */
+@keyframes fadeInPanel {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.92); }
+    to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Заголовок */
+.titleMyProjects {
+    text-align: center;
+    margin-bottom: 22px;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* Кнопка закрытия */
+.close-MyProjects {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.close-MyProjects img {
+    width: 32px;
+    height: 32px;
+    filter: brightness(0) invert(1);
+    opacity: 0.85;
+}
+
+body.theme-light .close-MyProjects img {
+    filter: none;
+}
+
+.close-MyProjects:hover img {
+    transform: scale(1.12);
+    opacity: 1;
+}
+
+/* Контент панели */
+.MyProjects-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Кнопка добавления проекта / импорт */
+.plus-button,
+.import-button {
+    width: 44px;
+    height: 44px;
+
+    margin-right: 10px;
+    cursor: pointer;
+
+    border-radius: 12px;
+    transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease;
+
+    filter: drop-shadow(0 3px 8px var(--accent-soft));
+}
+
+.plus-button:hover,
+.import-button:hover {
+    transform: scale(1.12);
+    filter: drop-shadow(0 0 12px var(--accent));
+}
+
+/* Список проектов */
+.project-list {
+    margin-top: 25px;
+    flex: 1;
+
+    overflow-y: auto;
+    border-radius: var(--radius-lg);
+
+    background: var(--bg-elevated-soft);
+    padding: 18px;
+
+    box-shadow: inset 0 0 12px rgba(0,0,0,0.25);
+
+    color: var(--text-soft);
+}
+
+/* Стилизация скролла */
+.project-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.project-list::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 10px;
+}
+
+.project-list::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* Элемент списка проекта */
+.project-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: var(--bg-elevated);
+    padding: 14px 18px;
+    border-radius: var(--radius-lg);
+    margin-bottom: 12px;
+    color: var(--text);
+
+    border: 1px solid var(--border);
+    position: relative;
+}
+
+/* Контейнер кнопки трёх точек */
+.project-menu {
+    position: relative;
+}
+
+/* Кнопка "три точки" */
+.menu-dots {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.menu-dots img {
+    width: 26px;
+    height: 26px;
+    filter: brightness(0) invert(1);
+    opacity: 0.85;
+    transition: 0.25s ease;
+}
+
+body.theme-light .menu-dots img {
+    filter: none;
+}
+
+.menu-dots:hover img {
+    transform: scale(1.12);
+    opacity: 1;
+}
+
+/* ВЫПАДАЮЩЕЕ МЕНЮ */
+.menu-dropdown {
+    position: absolute;
+    right: 0;
+    top: 36px;
+
+    width: 160px;
+
+    background: var(--bg-elevated-soft);
+    border-radius: var(--radius-lg);
+
+    display: none;
+    flex-direction: column;
+
+    box-shadow: var(--shadow-soft);
+    padding: 6px 0;
+
+    z-index: 2000;
+}
+
+.menu-dropdown.active { display: flex; }
+
+/* Пункты меню */
+.menu-dropdown div {
+    padding: 10px 16px;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 15px;
+
+    transition: 0.2s ease;
+}
+
+.menu-dropdown div:hover {
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+}
+
+/* Пункт "Удалить" */
+.menu-dropdown .danger:hover {
+    background: rgba(255, 80, 112, 0.2);
+    color: var(--danger);
+}
+
+/* Модалка */
+.modals {
+    display: none;
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+
+    justify-content: center;
+    align-items: center;
+
+    animation: fadeModal 0.3s ease;
+}
+
+@keyframes fadeModal { from {opacity:0;} to {opacity:1;} }
+
+/* Контент модалки */
+.modals-content {
+    background: var(--bg-elevated);
+    padding: 28px;
+    border-radius: var(--radius-lg);
+
+    width: 350px;
+    text-align: center;
+
+    box-shadow: var(--shadow-soft);
+}
+
+.modals-content h2 {
+    margin-bottom: 16px;
+    color: var(--text);
+}
+
+.modals-content input {
+    width: 100%;
+    padding: 12px;
+
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+
+    background: var(--bg-elevated-soft);
+    color: var(--text);
+
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+
+.modals-content button {
+    width: 100%;
+    padding: 12px 0;
+
+    border: none;
+    border-radius: var(--radius-lg);
+
+    background: var(--accent);
+    color: var(--text);
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.modals-content button:hover {
+    background: var(--accent-strong);
+    transform: scale(1.03);
+}
